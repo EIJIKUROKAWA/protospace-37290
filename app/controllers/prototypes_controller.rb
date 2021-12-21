@@ -3,11 +3,13 @@ class PrototypesController < ApplicationController
 
   def index
     @prototypes = Prototype.includes(:user).order("created_at DESC")
+    
   end
 
   def new
     @prototype = Prototype.new
   end
+  
   def create
 
     @prototype = Prototype.new(prototype_params)
