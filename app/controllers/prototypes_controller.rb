@@ -21,8 +21,10 @@ class PrototypesController < ApplicationController
   def show
     @prototype = Prototype.find(params[:id])
     @comment = Comment.new
-    @comments = @prototype.comments.includes(:user)   
+    @comments = @prototype.comments.includes(:user)
+     
   end
+  
   def edit
     unless user_signed_in?
       redirect_to action: :index
@@ -33,9 +35,9 @@ class PrototypesController < ApplicationController
 
 
   def update
-    prototype = Prototype.find(params[:id])
-    if prototype.update(prototype_params)
-      redirect_to prototype_path
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototype_params)
+      redirect_to @prototype_path
     else
       render :edit
     end
